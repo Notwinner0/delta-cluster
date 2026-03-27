@@ -9,3 +9,5 @@ resources:
   - sealed-mongo-init-script-secret.yaml
   - none-town-deployment.yaml
   - none-town-ingress.yaml
+patchesStrategicMerge:
+  - add-init-container.yaml
