@@ -6,7 +6,7 @@ resources:
   - mongo-deployment.yaml
   - mongodb-pvc.yaml
   - sealed-none-town-config.yaml
-  - sealed-mongo-init-script-secret.yaml
+  - sealed-mongo-init-script.yaml
   - none-town-deployment.yaml
   - none-town-ingress.yaml
 patchesStrategicMerge:
