@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: none-town
+resources:
+  - namespace.yaml
+  - mongo-deployment.yaml
+  - mongodb-pvc.yaml
+  - sealed-none-town-config.yaml
+  - sealed-mongo-init-script-secret.yaml
+  - none-town-deployment.yaml
+  - none-town-ingress.yaml

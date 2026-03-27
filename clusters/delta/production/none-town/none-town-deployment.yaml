@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: none-town-deployment
+  namespace: production
+  labels:
+    app: none-town
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: none-town
+  template:
+    metadata:
+      labels:
+        app: none-town
+    spec:
+      imagePullSecrets:
+        - name: ghcr-secret
+      containers:
+        - name: none-town
+          image: ghcr.io/notwinner0/none-town:latest
+          ports:
+            - containerPort: 443
+          volumeMounts:
+            - name: secret-volume
+              mountPath: /app/config.json
+              subPath: config.json
+              readOnly: true
+            - name: cert
+              mountPath: /etc/certs
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: none-town-config
+        - name: cert
+          secret:
+            secretName: n0ne-sytes-tls
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: none-town-service
+  namespace: production
+spec:
+  type: ClusterIP      # изменено с NodePort
+  selector:
+    app: none-town
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: 443
