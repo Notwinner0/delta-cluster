@@ -1,3 +1,4 @@
+# renovate: datasource=github-releases depName=kubernetes/ingress-nginx currentValue=v1.14.3
 apiVersion: v1
 kind: Namespace
 metadata:

@@ -1,3 +1,4 @@
+# renovate: datasource=github-releases depName=rancher/local-path-provisioner currentValue=v0.0.35
 apiVersion: v1
 kind: Namespace
 metadata:

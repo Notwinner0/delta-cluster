@@ -1,3 +1,4 @@
+# renovate: datasource=github-releases depName=bitnami-labs/sealed-secrets currentValue=v0.36.1
 ---
 apiVersion: apps/v1
 kind: Deployment
