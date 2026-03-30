@@ -107,6 +107,7 @@ targets:
     name: Replace cert-manager.yaml with latest version
     kind: file
     scmid: default
+    sourceid: cert-managerDownload
     spec:
       file: "clusters/delta/infrastructure/cert-manager/cert-manager.yaml"
       content: '{{ source "cert-managerDownload" }}'
@@ -115,6 +116,7 @@ targets:
     name: Replace deploy.yaml with latest version
     kind: file
     scmid: default
+    sourceid: ingress-nginxDownload
     spec:
       file: "clusters/delta/infrastructure/ingress-nginx/deploy.yaml"
       content: '{{ source "ingress-nginxDownload" }}'
@@ -123,6 +125,7 @@ targets:
     name: Replace local-path-storage.yaml with latest version
     kind: file
     scmid: default
+    sourceid: local-path-provisionerDownload
     spec:
       file: "clusters/delta/infrastructure/local-path-storage/local-path-storage.yaml"
       content: '{{ source "local-path-provisionerDownload" }}'
@@ -131,6 +134,7 @@ targets:
     name: Replace controller.yaml with latest version
     kind: file
     scmid: default
+    sourceid: sealed-secretsDownload
     spec:
       file: "clusters/delta/infrastructure/sealed-secrets/controller.yaml"
       content: '{{ source "sealed-secretsDownload" }}'
@@ -139,6 +143,7 @@ targets:
     name: Replace metallb-native.yaml with latest version
     kind: file
     scmid: default
+    sourceid: metallbDownload
     spec:
       file: "clusters/delta/infrastructure/metallb-system/metallb-native.yaml"
       content: '{{ source "metallbDownload" }}'
