@@ -72,35 +72,35 @@ sources:
     dependson:
       - cert-managerVersion
     spec:
-      url: "https://github.com/cert-manager/cert-manager/releases/download/{{ source `cert-managerVersion` }}/cert-manager.yaml"
+      url: "https://github.com/cert-manager/cert-manager/releases/download/{{ source 'cert-managerVersion' }}/cert-manager.yaml"
   ingress-nginxDownload:
     name: Download latest ingress-nginx
     kind: http
     dependson:
       - ingress-nginxVersion
     spec:
-      url: "https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-{{ source `ingress-nginxVersion` }}/deploy/static/provider/cloud/deploy.yaml"
+      url: "https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-{{ source 'ingress-nginxVersion' }}/deploy/static/provider/cloud/deploy.yaml"
   local-path-provisionerDownload:
     name: Download latest local-path-provisioner
     kind: http
     dependson:
       - local-path-provisionerVersion
     spec:
-      url: "https://raw.githubusercontent.com/rancher/local-path-provisioner/refs/tags/{{ source `local-path-provisionerVersion` }}/deploy/local-path-storage.yaml"
+      url: "https://raw.githubusercontent.com/rancher/local-path-provisioner/refs/tags/{{ source 'local-path-provisionerVersion' }}/deploy/local-path-storage.yaml"
   sealed-secretsDownload:
     name: Download latest sealed-secrets
     kind: http
     dependson:
       - sealed-secretsVersion
     spec:
-      url: "https://github.com/bitnami-labs/sealed-secrets/releases/download/{{ source `sealed-secretsVersion` }}/controller.yaml"
+      url: "https://github.com/bitnami-labs/sealed-secrets/releases/download/{{ source 'sealed-secretsVersion' }}/controller.yaml"
   metallbDownload:
     name: Download latest metallb
     kind: http
     dependson:
       - metallbVersion
     spec:
-      url: "https://raw.githubusercontent.com/metallb/metallb/refs/tags/{{ source `metallbVersion` }}/config/manifests/metallb-native.yaml"
+      url: "https://raw.githubusercontent.com/metallb/metallb/refs/tags/{{ source 'metallbVersion' }}/config/manifests/metallb-native.yaml"
 
 targets:
   cert-managerReplace:
