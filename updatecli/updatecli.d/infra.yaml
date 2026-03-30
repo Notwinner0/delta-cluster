@@ -24,7 +24,7 @@ sources:
       token: '{{ requiredEnv "GITHUB_TOKEN" }}'
       versionfilter:
         kind: semver
-        pattern: '*'
+        pattern: "*"
   ingress-nginxVersion:
     name: Get latest ingress-nginx version
     kind: githubrelease
@@ -44,7 +44,7 @@ sources:
       token: '{{ requiredEnv "GITHUB_TOKEN" }}'
       versionfilter:
         kind: semver
-        pattern: '*'
+        pattern: "*"
   sealed-secretsVersion:
     name: Get latest sealed-secrets version
     kind: githubrelease
@@ -54,7 +54,7 @@ sources:
       token: '{{ requiredEnv "GITHUB_TOKEN" }}'
       versionfilter:
         kind: semver
-        pattern: '*'
+        pattern: "*"
   metallbVersion:
     name: Get latest metallb version
     kind: githubrelease
@@ -64,7 +64,7 @@ sources:
       token: '{{ requiredEnv "GITHUB_TOKEN" }}'
       versionfilter:
         kind: semver
-        pattern: '*'
+        pattern: "*"
   # download
   cert-managerDownload:
     name: Download latest cert-manager
