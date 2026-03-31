@@ -79,7 +79,7 @@ sources:
     dependson:
       - ingress-nginxVersion
     spec:
-      url: 'https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-{{ source "ingress-nginxVersion" }}/deploy/static/provider/cloud/deploy.yaml'
+      url: 'https://raw.githubusercontent.com/kubernetes/ingress-nginx/{{ source "ingress-nginxVersion" }}/deploy/static/provider/cloud/deploy.yaml'
   local-path-provisionerDownload:
     name: Download latest local-path-provisioner
     kind: http
