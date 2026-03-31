@@ -13,6 +13,18 @@ scms:
       branch: '{{ .scm.github.branch }}'
       user: '{{ .scm.github.user }}'
 
+actions:
+  default:
+    title: 'chore(deps): replace local-path-provisioner to {{ source "local-path-provisionerVersion" }}'
+    kind: github/pullrequest
+    scmid: default
+    spec:
+      automerge: false
+      mergemethod: squash
+      labels:
+        - dependencies
+        - automated
+
 sources:
   local-path-provisionerVersion:
     name: Get latest local-path-provisioner version

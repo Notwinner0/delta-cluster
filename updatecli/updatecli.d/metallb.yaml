@@ -13,6 +13,18 @@ scms:
       branch: '{{ .scm.github.branch }}'
       user: '{{ .scm.github.user }}'
 
+actions:
+  default:
+    title: 'chore(deps): replace metallb to {{ source "metallbVersion" }}'
+    kind: github/pullrequest
+    scmid: default
+    spec:
+      automerge: false
+      mergemethod: squash
+      labels:
+        - dependencies
+        - automated
+
 sources:
   metallbVersion:
     name: Get latest metallb version

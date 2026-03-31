@@ -13,6 +13,18 @@ scms:
       branch: '{{ .scm.github.branch }}'
       user: '{{ .scm.github.user }}'
 
+actions:
+  default:
+    title: 'chore(deps): replace cert-manager to {{ source "cert-managerVersion" }}'
+    kind: github/pullrequest
+    scmid: default
+    spec:
+      automerge: false
+      mergemethod: squash
+      labels:
+        - dependencies
+        - automated
+
 sources:
   cert-managerVersion:
     name: Get latest cert-manager version

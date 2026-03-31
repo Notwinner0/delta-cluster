@@ -6,12 +6,25 @@ scms:
     spec:
       owner: '{{ .scm.github.owner }}'
       commitusingapi: true
+      workingbranch: true 
       email: '{{ .scm.github.email }}'
       repository: '{{ .scm.github.repository }}'
       token: '{{ requiredEnv "GITHUB_TOKEN" }}'
       username: '{{ requiredEnv "GITHUB_ACTOR"}}'
       branch: '{{ .scm.github.branch }}'
       user: '{{ .scm.github.user }}'
+
+actions:
+  default:
+    title: 'chore(deps): replace ingress-nginx to {{ source "ingress-nginxVersion" }}'
+    kind: github/pullrequest
+    scmid: default
+    spec:
+      automerge: false
+      mergemethod: squash
+      labels:
+        - dependencies
+        - automated
 
 sources:
   ingress-nginxVersion:
