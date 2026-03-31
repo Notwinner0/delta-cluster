@@ -107,49 +107,49 @@ targets:
     name: Replace cert-manager.yaml with latest version
     kind: file
     scmid: default
-    sourceid: cert-managerDownload
     spec:
+      sourceid: cert-managerDownload
       file: "clusters/delta/infrastructure/cert-manager/cert-manager.yaml"
+      forcecreate: true
       content: |
         {{ source "cert-managerDownload" }}
-      forcecreate: true
   ingress-nginxReplace:
     name: Replace deploy.yaml with latest version
     kind: file
     scmid: default
-    sourceid: ingress-nginxDownload
     spec:
+      sourceid: ingress-nginxDownload
       file: "clusters/delta/infrastructure/ingress-nginx/deploy.yaml"
+      forcecreate: true
       content: |
         {{ source "ingress-nginxDownload" }}
-      forcecreate: true
   local-path-provisionerReplace:
     name: Replace local-path-storage.yaml with latest version
     kind: file
     scmid: default
-    sourceid: local-path-provisionerDownload
     spec:
+      sourceid: local-path-provisionerDownload
       file: "clusters/delta/infrastructure/local-path-storage/local-path-storage.yaml"
+      forcecreate: true
       content: |
         {{ source "local-path-provisionerDownload" }}
-      forcecreate: true
   sealed-secretsReplace:
     name: Replace controller.yaml with latest version
     kind: file
     scmid: default
-    sourceid: sealed-secretsDownload
     spec:
+      sourceid: sealed-secretsDownload
       file: "clusters/delta/infrastructure/sealed-secrets/controller.yaml"
+      forcecreate: true
       content: |
         {{ source "sealed-secretsDownload" }}
-      forcecreate: true
   metallbReplace:
     name: Replace metallb-native.yaml with latest version
     kind: file
     scmid: default
-    sourceid: metallbDownload
     spec:
+      sourceid: metallbDownload
       file: "clusters/delta/infrastructure/metallb-system/metallb-native.yaml"
+      forcecreate: true
       content: |
         {{ source "metallbDownload" }}
-      forcecreate: true
