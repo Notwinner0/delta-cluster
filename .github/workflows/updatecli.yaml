@@ -20,7 +20,7 @@ jobs:
         uses: updatecli/updatecli-action@v2
 
       - name: Run Updatecli in Dry Run mode
-        run: updatecli pipeline diff --config updatecli/updatecli.d --log-level debug
+        run: updatecli pipeline diff --config updatecli/updatecli.d
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
