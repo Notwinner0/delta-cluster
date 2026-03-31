@@ -25,8 +25,6 @@ sources:
       versionfilter:
         kind: semver
         pattern: "*"
-    transformers:
-      - addprefix: "v"
   ingress-nginxVersion:
     name: Get latest ingress-nginx version
     kind: githubrelease
@@ -35,10 +33,8 @@ sources:
       repository: "ingress-nginx"
       token: '{{ requiredEnv "GITHUB_TOKEN" }}'
       versionfilter:
-        kind: semver
-        pattern: "*"
-    transformers:
-      - addprefix: "controller-v"
+        kind: regex
+        pattern: 'controller-(v\d+\.\d+\.\d+)'
   local-path-provisionerVersion:
     name: Get latest local-path-provisioner version
     kind: githubrelease
@@ -49,8 +45,6 @@ sources:
       versionfilter:
         kind: semver
         pattern: "*"
-    transformers:
-      - addprefix: "v"
   sealed-secretsVersion:
     name: Get latest sealed-secrets version
     kind: githubrelease
@@ -61,8 +55,6 @@ sources:
       versionfilter:
         kind: semver
         pattern: "*"
-    transformers:
-      - addprefix: "v"
   metallbVersion:
     name: Get latest metallb version
     kind: githubrelease
@@ -73,8 +65,6 @@ sources:
       versionfilter:
         kind: semver
         pattern: "*"
-    transformers:
-      - addprefix: "v"
   # download
   cert-managerDownload:
     name: Download latest cert-manager
