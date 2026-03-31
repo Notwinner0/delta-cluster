@@ -1,0 +1,43 @@
+name: Update local-path-provisioner
+
+scms:
+  default:
+    kind: "github"
+    spec:
+      owner: '{{ .scm.github.owner }}'
+      commitusingapi: true
+      email: '{{ .scm.github.email }}'
+      repository: '{{ .scm.github.repository }}'
+      token: '{{ requiredEnv "GITHUB_TOKEN" }}'
+      username: '{{ requiredEnv "GITHUB_ACTOR"}}'
+      branch: '{{ .scm.github.branch }}'
+      user: '{{ .scm.github.user }}'
+
+sources:
+  local-path-provisionerVersion:
+    name: Get latest local-path-provisioner version
+    kind: githubrelease
+    spec:
+      owner: "rancher"
+      repository: "local-path-provisioner"
+      token: '{{ requiredEnv "GITHUB_TOKEN" }}'
+      versionfilter:
+        kind: semver
+        pattern: "*"
+  local-path-provisionerDownload:
+    name: Download latest local-path-provisioner
+    kind: http
+    dependson:
+      - local-path-provisionerVersion
+    spec:
+      url: 'https://raw.githubusercontent.com/rancher/local-path-provisioner/refs/tags/{{ source "local-path-provisionerVersion" }}/deploy/local-path-storage.yaml'
+
+targets:
+  local-path-provisionerReplace:
+    name: Replace local-path-storage.yaml with latest version
+    kind: file
+    scmid: default
+    sourceid: local-path-provisionerDownload
+    spec:
+      file: "clusters/delta/infrastructure/local-path-storage/local-path-storage.yaml"
+      forcecreate: true

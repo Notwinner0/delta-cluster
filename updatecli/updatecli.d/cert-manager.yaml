@@ -1,0 +1,43 @@
+name: Update cert-manager.yaml
+
+scms:
+  default:
+    kind: "github"
+    spec:
+      owner: '{{ .scm.github.owner }}'
+      commitusingapi: true
+      email: '{{ .scm.github.email }}'
+      repository: '{{ .scm.github.repository }}'
+      token: '{{ requiredEnv "GITHUB_TOKEN" }}'
+      username: '{{ requiredEnv "GITHUB_ACTOR"}}'
+      branch: '{{ .scm.github.branch }}'
+      user: '{{ .scm.github.user }}'
+
+sources:
+  cert-managerVersion:
+    name: Get latest cert-manager version
+    kind: githubrelease
+    spec:
+      owner: "cert-manager"
+      repository: "cert-manager"
+      token: '{{ requiredEnv "GITHUB_TOKEN" }}'
+      versionfilter:
+        kind: semver
+        pattern: "*"
+  cert-managerDownload:
+    name: Download latest cert-manager
+    kind: http
+    dependson:
+      - cert-managerVersion
+    spec:
+      url: 'https://github.com/cert-manager/cert-manager/releases/download/{{ source "cert-managerVersion" }}/cert-manager.yaml'
+
+targets:
+  cert-managerReplace:
+    name: Replace cert-manager.yaml with latest version
+    kind: file
+    scmid: default
+    sourceid: cert-managerDownload
+    spec:
+      file: "clusters/delta/infrastructure/cert-manager/cert-manager.yaml"
+      forcecreate: true

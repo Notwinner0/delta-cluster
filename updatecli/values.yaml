@@ -1,0 +1,10 @@
+scm:
+  github:
+    owner: "Notwinner0"
+    commitusingapi: true
+    email: bot@updatecli.io
+    repository: "delta-cluster"
+    token: '{{ requiredEnv "GITHUB_TOKEN" }}'
+    username: '{{ requiredEnv "GITHUB_ACTOR"}}'
+    branch: "main"
+    user: "updatecli"

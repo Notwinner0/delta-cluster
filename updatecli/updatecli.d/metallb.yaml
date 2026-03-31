@@ -1,0 +1,43 @@
+name: Update metallb
+
+scms:
+  default:
+    kind: "github"
+    spec:
+      owner: '{{ .scm.github.owner }}'
+      commitusingapi: true
+      email: '{{ .scm.github.email }}'
+      repository: '{{ .scm.github.repository }}'
+      token: '{{ requiredEnv "GITHUB_TOKEN" }}'
+      username: '{{ requiredEnv "GITHUB_ACTOR"}}'
+      branch: '{{ .scm.github.branch }}'
+      user: '{{ .scm.github.user }}'
+
+sources:
+  metallbVersion:
+    name: Get latest metallb version
+    kind: githubrelease
+    spec:
+      owner: "metallb"
+      repository: "metallb"
+      token: '{{ requiredEnv "GITHUB_TOKEN" }}'
+      versionfilter:
+        kind: semver
+        pattern: "*"
+  metallbDownload:
+    name: Download latest metallb
+    kind: http
+    dependson:
+      - metallbVersion
+    spec:
+      url: 'https://raw.githubusercontent.com/metallb/metallb/refs/tags/{{ source "metallbVersion" }}/config/manifests/metallb-native.yaml'
+
+targets:
+  metallbReplace:
+    name: Replace metallb-native.yaml with latest version
+    kind: file
+    scmid: default
+    sourceid: metallbDownload
+    spec:
+      file: "clusters/delta/infrastructure/metallb-system/metallb-native.yaml"
+      forcecreate: true

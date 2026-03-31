@@ -1,0 +1,43 @@
+name: Update ingress-nginx
+
+scms:
+  default:
+    kind: "github"
+    spec:
+      owner: '{{ .scm.github.owner }}'
+      commitusingapi: true
+      email: '{{ .scm.github.email }}'
+      repository: '{{ .scm.github.repository }}'
+      token: '{{ requiredEnv "GITHUB_TOKEN" }}'
+      username: '{{ requiredEnv "GITHUB_ACTOR"}}'
+      branch: '{{ .scm.github.branch }}'
+      user: '{{ .scm.github.user }}'
+
+sources:
+  ingress-nginxVersion:
+    name: Get latest ingress-nginx version
+    kind: githubrelease
+    spec:
+      owner: "kubernetes"
+      repository: "ingress-nginx"
+      token: '{{ requiredEnv "GITHUB_TOKEN" }}'
+      versionfilter:
+        kind: regex
+        pattern: 'controller-(v\d+\.\d+\.\d+)'
+  ingress-nginxDownload:
+    name: Download latest ingress-nginx
+    kind: http
+    dependson:
+      - ingress-nginxVersion
+    spec:
+      url: 'https://raw.githubusercontent.com/kubernetes/ingress-nginx/{{ source "ingress-nginxVersion" }}/deploy/static/provider/cloud/deploy.yaml'
+
+targets:
+  ingress-nginxReplace:
+    name: Replace deploy.yaml with latest version
+    kind: file
+    scmid: default
+    sourceid: ingress-nginxDownload
+    spec:
+      file: "clusters/delta/infrastructure/ingress-nginx/deploy.yaml"
+      forcecreate: true
