@@ -4,3 +4,4 @@ namespace: production
 resources:
   - omni-ingress.yaml
   - omni-service-endpoints.yaml
+  - omni-auth-service-endpoints.yaml
