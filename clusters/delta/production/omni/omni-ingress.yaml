@@ -4,10 +4,26 @@ metadata:
   name: omni-ingress
   namespace: production
   annotations:
-    nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
-    nginx.ingress.kubernetes.io/grpc-backend: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/http2-push-preload: "true"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      # Определяем переменную is_grpc
+      set $is_grpc 0;
+      if ($http_content_type = "application/grpc") {
+          set $is_grpc 1;
+      }
+
+      # Если это gRPC запрос, устанавливаем таймауты и передаём его на grpc_pass
+      if ($is_grpc) {
+          grpc_read_timeout 1h;
+          grpc_send_timeout 1h;
+          grpc_pass grpc://omni-service.production.svc.cluster.local:443;
+          break;
+      }
+
+      # Для всех остальных запросов используем обычный proxy_pass
+      proxy_pass http://omni-service.production.svc.cluster.local:443;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection $connection_upgrade;
 spec:
   ingressClassName: nginx
   tls:
