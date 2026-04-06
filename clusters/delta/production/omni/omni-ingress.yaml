@@ -5,6 +5,9 @@ metadata:
   namespace: production
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+    nginx.ingress.kubernetes.io/grpc-backend: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/http2-push-preload: "on"
 spec:
   ingressClassName: nginx
   tls:
