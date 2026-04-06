@@ -10,6 +10,7 @@ spec:
   tls:
   - hosts:
     - omni.internal
+    secretName: omni-tls-secret
   rules:
   - host: omni.internal
     http:
