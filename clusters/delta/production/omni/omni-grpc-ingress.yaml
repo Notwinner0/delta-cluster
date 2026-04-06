@@ -11,13 +11,13 @@ spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - api.omni.internal
+    - omni.internal
     secretName: omni-tls-secret
   rules:
-  - host: api.omni.internal
+  - host: omni.internal
     http:
       paths:
-      - path: /
+      - path: /api/
         pathType: Prefix
         backend:
           service:
