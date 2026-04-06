@@ -5,3 +5,4 @@ metadata:
   namespace: ingress-nginx
 data:
   "8090": "production/omni-service:8090"
+  "8091": "production/omni-service:8091"

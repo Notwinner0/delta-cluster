@@ -21,3 +21,5 @@ subsets:
         port: 443
       - name: siderolink
         port: 8090
+      - name: eventsink         # <-- Новый порт
+        port: 8091              # <-- Новый порт

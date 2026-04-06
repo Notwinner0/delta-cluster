@@ -5,7 +5,12 @@ metadata:
   namespace: ingress-nginx
 spec:
   ports:
+    - name: https
+      port: 443
+      targetPort: 443
     - name: siderolink
       port: 8090
       targetPort: 8090
-      protocol: TCP
+    - name: eventsink
+      port: 8091
+      targetPort: 8091
