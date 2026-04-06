@@ -10,7 +10,6 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-ssl-verify: "off"
     nginx.ingress.kubernetes.io/proxy-buffering: "on"
     nginx.ingress.kubernetes.io/proxy-max-temp-file-size: "0"
-    nginx.ingress.kubernetes.io/connection-proxy-header: "upgrade"
 spec:
   ingressClassName: nginx
   tls:
