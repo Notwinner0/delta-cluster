@@ -3,5 +3,6 @@ kind: Kustomization
 namespace: production
 resources:
   - omni-ingress.yaml
+  - auth-ingress.yaml
   - omni-service-endpoints.yaml
   - omni-auth-service-endpoints.yaml
