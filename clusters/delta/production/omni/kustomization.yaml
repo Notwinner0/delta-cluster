@@ -6,3 +6,4 @@ resources:
   - auth-ingress.yaml
   - omni-service-endpoints.yaml
   - omni-auth-service-endpoints.yaml
+  - omni-grpc-ingress.yaml
