@@ -5,6 +5,7 @@ metadata:
   namespace: production
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    cert-manager.io/cluster-issuer: "myca-cluster-issuer"
 spec:
   ingressClassName: nginx
   tls:
