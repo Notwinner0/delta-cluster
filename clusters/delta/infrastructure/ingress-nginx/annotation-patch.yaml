@@ -5,3 +5,4 @@ metadata:
   namespace: ingress-nginx
 data:
   allow-snippet-annotations: "true"
+  annotations-risk-level: "Critical"
