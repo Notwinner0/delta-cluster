@@ -18,3 +18,4 @@ subsets:
       - ip: 10.0.0.69
     ports:
       - port: 443
+      - port: 8090
