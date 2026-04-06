@@ -4,4 +4,4 @@ metadata:
   name: tcp-services
   namespace: ingress-nginx
 data:
-  8090: "production/omni-service:8090"
+  "8090": "production/omni-service:8090"
