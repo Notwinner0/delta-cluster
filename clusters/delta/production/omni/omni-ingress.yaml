@@ -4,6 +4,7 @@ metadata:
   name: omni-ingress
   namespace: production
   annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "myca-cluster-issuer"
 spec:
