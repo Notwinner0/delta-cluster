@@ -1,19 +1,20 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: omni-ingress
+  name: omni-grpc-ingress
   namespace: production
   annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    cert-manager.io/cluster-issuer: "myca-cluster-issuer"
+    nginx.ingress.kubernetes.io/backend-protocol: "GRPCS"
+    nginx.ingress.kubernetes.io/proxy-ssl-verify: "off"
+    nginx.ingress.kubernetes.io/proxy-buffering: "off"
 spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - omni.internal
+    - api.omni.internal
     secretName: omni-tls-secret
   rules:
-  - host: omni.internal
+  - host: api.omni.internal
     http:
       paths:
       - path: /
