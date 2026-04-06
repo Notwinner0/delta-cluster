@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - cert-manager.yaml
   - cluster-issuer.yaml
+  - myca-cluster-issuer.yaml
