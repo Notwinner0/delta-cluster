@@ -43,10 +43,8 @@ kind: Service
 metadata:
   name: none-town-service
   namespace: production
-  annotations:
-    metallb.universe.tf/loadBalancerIPs: 10.0.0.100 # definitive 100
 spec:
-  type: LoadBalancer
+  type: ClusterIP      # изменено с NodePort
   selector:
     app: none-town
   ports:
