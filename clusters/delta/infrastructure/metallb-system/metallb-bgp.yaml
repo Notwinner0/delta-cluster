@@ -17,3 +17,12 @@ spec:
   ipAddressPools:
     - production-pool
   aggregationLength: 32
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: production-pool
+  namespace: metallb-system
+spec:
+  addresses:
+    - 10.0.0.100-10.0.0.200 # диапазон, не занятый другими VM
