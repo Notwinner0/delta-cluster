@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: speaker
+  namespace: metallb-system
+spec:
+  selector:
+    matchLabels:
+      app: metallb
+      component: speaker
+  template:
+    spec:
+      containers:
+        - name: speaker
+          securityContext:
+            allowPrivilegeEscalation: true   # нужно для NET_ADMIN
+            capabilities:
+              add:
+                - NET_RAW
+                - NET_ADMIN
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            # privileged: false  # оставляем false, если достаточно capabilities
