@@ -21,4 +21,4 @@ spec:
               drop:
                 - ALL
             readOnlyRootFilesystem: true
-            # privileged: false  # оставляем false, если достаточно capabilities
+            privileged: false  # infinite power
