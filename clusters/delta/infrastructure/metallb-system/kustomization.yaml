@@ -5,3 +5,4 @@ resources:
   - metallb-bgp.yaml
 patches:
   - path: metallb-more-power.yaml
+  - path: metallb-ignore-label.yaml
