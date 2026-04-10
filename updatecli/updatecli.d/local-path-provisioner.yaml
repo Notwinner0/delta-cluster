@@ -1,4 +1,4 @@
-name: Update longhorn
+name: Update local-path-provisioner
 
 scms:
   default:
@@ -15,7 +15,7 @@ scms:
 
 actions:
   default:
-    title: 'chore(deps): replace longhorn to {{ source "longhornVersion" }}'
+    title: 'chore(deps): replace local-path-provisioner to {{ source "local-path-provisionerVersion" }}'
     kind: github/pullrequest
     scmid: default
     spec:
@@ -26,30 +26,30 @@ actions:
         - automated
 
 sources:
-  longhornVersion:
-    name: Get latest longhorn version
+  local-path-provisionerVersion:
+    name: Get latest local-path-provisioner version
     kind: githubrelease
     spec:
-      owner: "longhorn"
-      repository: "longhorn"
+      owner: "rancher"
+      repository: "local-path-provisioner"
       token: '{{ requiredEnv "GITHUB_TOKEN" }}'
       versionfilter:
         kind: semver
         pattern: "*"
-  longhornDownload:
-    name: Download latest longhorn
+  local-path-provisionerDownload:
+    name: Download latest local-path-provisioner
     kind: http
     dependson:
-      - longhornVersion
+      - local-path-provisionerVersion
     spec:
-      url: 'https://raw.githubusercontent.com/longhorn/longhorn/refs/tags/{{ source "longhornVersion" }}/deploy/longhorn.yaml'
+      url: 'https://raw.githubusercontent.com/rancher/local-path-provisioner/refs/tags/{{ source "local-path-provisionerVersion" }}/deploy/local-path-storage.yaml'
 
 targets:
-  longhornReplace:
-    name: Replace longhorn.yaml with latest version
+  local-path-provisionerReplace:
+    name: Replace local-path-storage.yaml with latest version
     kind: file
     scmid: default
-    sourceid: longhornDownload
+    sourceid: local-path-provisionerDownload
     spec:
-      file: "clusters/delta/infrastructure/longhorn-system/longhorn.yaml"
+      file: "clusters/delta/infrastructure/local-path-storage/local-path-storage.yaml"
       forcecreate: true

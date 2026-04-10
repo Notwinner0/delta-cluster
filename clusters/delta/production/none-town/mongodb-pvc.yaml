@@ -5,8 +5,8 @@ metadata:
   namespace: production
 spec:
   accessModes:
-    - ReadWriteOnce
-  storageClassName: longhorn
+    - ReadWriteOnce  # Том можно монтировать на чтение и запись только одной ноде за раз
+  storageClassName: local-path  # Или другой класс, поддерживаемый Talos
   resources:
     requests:
       storage: 10Gi

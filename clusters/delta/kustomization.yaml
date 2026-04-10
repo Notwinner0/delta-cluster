@@ -5,5 +5,4 @@ resources:
 - ./infrastructure/metallb-system
 - ./infrastructure/ingress-nginx
 - ./infrastructure/sealed-secrets
-- ./infrastructure/longhorn-system
 - ./production
