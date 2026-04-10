@@ -13,6 +13,8 @@ spec:
       labels:
         app: mongodb
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: talos-ops-kes
       containers:
       - name: mongodb
         image: mongo:4
