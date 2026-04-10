@@ -4,7 +4,7 @@ namespace: production
 resources:
   - namespace.yaml
   - mongo-deployment.yaml
-  - mongodb-pvc.yaml
+  - mongodb-storage.yaml
   - sealed-none-town-config.yaml
   - sealed-mongo-init-script.yaml
   - none-town-deployment.yaml
