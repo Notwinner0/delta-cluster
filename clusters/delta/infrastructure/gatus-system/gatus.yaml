@@ -38,7 +38,7 @@ data:
         alerts:
           - "Game server is DOWN! Check the backend logs."
 
-        - name: none town api availability (int)
+      - name: none town api availability (int)
         url: http://none-town-service.production:443/api2/game/status
         interval: 20s
         conditions:
