@@ -12,6 +12,7 @@ data:
         client-secret: "${OIDC_CLIENT_SECRET}"
         redirect-url: "https://gatus.79.120.12.118.nip.io/authorization-code/callback"
         scopes: ["openid", "email", "profile"]
+        allowed-subjects: ["103976300338556122079"]
 
     metrics: true
     endpoints:
