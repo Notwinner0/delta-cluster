@@ -50,13 +50,6 @@ data:
           - "$.servers[0].dead == false"
           - "$.servers[0].offline == false"
 
-      - name: "MongoDB port connectivity (int)"
-        type: tcp
-        url: "mongo-service.production:27017"
-        interval: 30s
-        conditions:
-          - "[STATUS] == 200"
-
       - name: internet access
         url: http://connectivitycheck.gstatic.com/generate_204
         interval: 5m
