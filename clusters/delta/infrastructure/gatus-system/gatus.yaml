@@ -35,8 +35,6 @@ data:
           - "[STATUS] == 200"
           - "$.servers[0].dead == false"
           - "$.servers[0].offline == false"
-        alerts:
-          - "Game server is DOWN! Check the backend logs."
 
       - name: none town api availability (int)
         url: http://none-town-service.production:443/api2/game/status
