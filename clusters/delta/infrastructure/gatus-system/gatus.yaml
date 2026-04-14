@@ -13,7 +13,10 @@ data:
         redirect-url: "https://gatus.79.120.12.118.nip.io/authorization-code/callback"
         scopes: ["openid", "email", "profile"]
         allowed-subjects: ["103976300338556122079"]
-
+    alerting:
+      discord:
+        webhook-url: "${DISCORD_WEBHOOK_URL}"
+        message-content: "<@388252220321431552>"
     metrics: true
     endpoints:
       - name: none town (ext)
@@ -21,6 +24,10 @@ data:
         interval: 20s
         conditions:
           - "[STATUS] == 200"
+        alerts:
+          - type: discord
+            description: "none town (ext) down"
+            send-on-resolved: true
 
       - name: none town api availability (ext)
         url: https://n0ne.sytes.net/api2/game/status
@@ -100,6 +107,11 @@ spec:
                 secretKeyRef:
                   name: gatus-oidc
                   key: OIDC_CLIENT_SECRET
+            - name: DISCORD_WEBHOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: gatus-oidc
+                  key: DISCORD_WEBHOOK_URL
           resources:
             limits:
               cpu: 250m
