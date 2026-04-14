@@ -33,8 +33,8 @@ data:
         interval: 1m
         conditions:
           - "[STATUS] == 200"
-          - "$.servers[0].dead == false"
-          - "$.servers[0].offline == false"
+          - "[BODY].servers[0].dead == false"
+          - "[BODY].servers[0].offline == false"
 
       - name: none town api availability (int)
         url: http://none-town-service.production:443/api2/game/status
@@ -47,8 +47,8 @@ data:
         interval: 1m
         conditions:
           - "[STATUS] == 200"
-          - "$.servers[0].dead == false"
-          - "$.servers[0].offline == false"
+          - "[BODY].servers[0].dead == false"
+          - "[BODY].servers[0].offline == false"
 
       - name: internet access
         url: http://connectivitycheck.gstatic.com/generate_204
