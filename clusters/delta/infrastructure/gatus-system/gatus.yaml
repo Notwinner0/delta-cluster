@@ -54,6 +54,7 @@ data:
         type: tcp
         url: "mongo-service.production:27017"
         interval: 30s
+        conditions:
           - "[STATUS] == 200"
 
       - name: internet access
