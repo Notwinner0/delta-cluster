@@ -16,11 +16,51 @@ data:
 
     metrics: true
     endpoints:
-      - name: none town
+      - name: none town (ext)
         url: https://n0ne.sytes.net
         interval: 20s
         conditions:
           - "[STATUS] == 200"
+
+      - name: none town api availability (ext)
+        url: https://n0ne.sytes.net/api2/game/status
+        interval: 20s
+        conditions:
+          - "[STATUS] == 200"
+          - "[BODY] contains \"version\""
+          - "[BODY] contains \"servers\""
+
+      - name: "none town game status (ext)"
+        url: https://n0ne.sytes.net/api2/game/status
+        interval: 1m
+        conditions:
+          - "[STATUS] == 200"
+          - "$.servers[0].dead == false"
+          - "$.servers[0].offline == false"
+        alerts:
+          - "Game server is DOWN! Check the backend logs."
+
+        - name: none town api availability (int)
+        url: http://none-town-service.production:443/api2/game/status
+        interval: 20s
+        conditions:
+          - "[STATUS] == 200"
+          - "[BODY] contains \"version\""
+          - "[BODY] contains \"servers\""
+
+      - name: "none town game status (int)"
+        url: http://none-town-service.production:443/api2/game/status
+        interval: 1m
+        conditions:
+          - "[STATUS] == 200"
+          - "$.servers[0].dead == false"
+          - "$.servers[0].offline == false"
+
+      - name: "MongoDB port connectivity (int)"
+        type: tcp
+        url: "mongo-service.production:27017"
+        interval: 30s
+
       - name: internet access
         url: http://connectivitycheck.gstatic.com/generate_204
         interval: 5m
