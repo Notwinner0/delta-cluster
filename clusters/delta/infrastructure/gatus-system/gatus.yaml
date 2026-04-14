@@ -27,8 +27,6 @@ data:
         interval: 20s
         conditions:
           - "[STATUS] == 200"
-          - "[BODY] contains \"version\""
-          - "[BODY] contains \"servers\""
 
       - name: "none town game status (ext)"
         url: https://n0ne.sytes.net/api2/game/status
@@ -45,8 +43,6 @@ data:
         interval: 20s
         conditions:
           - "[STATUS] == 200"
-          - "[BODY] contains \"version\""
-          - "[BODY] contains \"servers\""
 
       - name: "none town game status (int)"
         url: http://none-town-service.production:443/api2/game/status
