@@ -5,6 +5,7 @@ metadata:
   namespace: cert-manager
 spec:
   releaseName: cert-manager
+  targetNamespace: cert-manager
   chart:
     spec:
     targetNamespace: cert-manager
