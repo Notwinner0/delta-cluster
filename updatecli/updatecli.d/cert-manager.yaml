@@ -40,6 +40,8 @@ sources:
       versionfilter:
         kind: semver
         pattern: "*"
+    transformers:
+      - trimprefix: "v"
 
 targets:
   cert-managerHelmRelease:
