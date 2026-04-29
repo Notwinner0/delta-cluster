@@ -5,12 +5,11 @@ metadata:
   namespace: cert-manager
 spec:
   releaseName: cert-manager
-  targetNamespace: cert-manager
+  targetNamespace: cert-manager          # ← перенесено на уровень spec
+  install:
+    createNamespace: true
   chart:
     spec:
-    targetNamespace: cert-manager
-    install:
-      createNamespace: true
       chart: cert-manager
       version: 1.20.2
       sourceRef:
@@ -20,5 +19,4 @@ spec:
   interval: 5m
   values:
     crds:
-      enabled: true
-      keep: true
+      enabled: false                     # ← важно: CRD уже восстановлены вручную
