@@ -6,4 +6,5 @@ resources:
 - ./infrastructure/ingress-nginx
 - ./infrastructure/sealed-secrets
 - ./infrastructure/gatus-system
+- ./infrastructure/local-path-storage
 - ./production
