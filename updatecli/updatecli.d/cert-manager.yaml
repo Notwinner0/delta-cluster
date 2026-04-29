@@ -1,4 +1,4 @@
-name: Update cert-manager.yaml
+name: Update cert-manager Helm chart
 
 scms:
   default:
@@ -15,41 +15,38 @@ scms:
 
 actions:
   default:
-    title: 'chore(deps): replace cert-manager to {{ source "cert-managerVersion" }}'
+    title: 'chore(deps): update cert-manager Helm chart to {{ source "cert-managerVersion" }}'
     kind: github/pullrequest
     scmid: default
     spec:
       automerge: false
       mergemethod: squash
+      description: |
+        ## Update cert-manager
+        Automated update to version {{ source "cert-managerVersion" }}.
+        
+        [Changelog](https://github.com/cert-manager/cert-manager/releases/tag/{{ source "cert-managerVersion" }})
       labels:
         - dependencies
         - automated
 
 sources:
   cert-managerVersion:
-    name: Get latest cert-manager version
-    kind: githubrelease
+    name: Get latest cert-manager Helm chart version
+    kind: helmchart
     spec:
-      owner: "cert-manager"
-      repository: "cert-manager"
-      token: '{{ requiredEnv "GITHUB_TOKEN" }}'
+      url: https://charts.jetstack.io
+      name: cert-manager
       versionfilter:
         kind: semver
         pattern: "*"
-  cert-managerDownload:
-    name: Download latest cert-manager
-    kind: http
-    dependson:
-      - cert-managerVersion
-    spec:
-      url: 'https://github.com/cert-manager/cert-manager/releases/download/{{ source "cert-managerVersion" }}/cert-manager.yaml'
 
 targets:
-  cert-managerReplace:
-    name: Replace cert-manager.yaml with latest version
-    kind: file
+  cert-managerHelmRelease:
+    name: Update cert-manager HelmRelease version
+    kind: yaml
     scmid: default
-    sourceid: cert-managerDownload
+    sourceid: cert-managerVersion
     spec:
-      file: "clusters/delta/infrastructure/cert-manager/cert-manager.yaml"
-      forcecreate: true
+      file: "clusters/delta/infrastructure/cert-manager/cert-manager-helmrelease.yaml"
+      key: "spec.chart.spec.version"
