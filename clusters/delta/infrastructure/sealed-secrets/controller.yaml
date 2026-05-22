@@ -39,7 +39,7 @@ spec:
         command:
         - controller
         env: []
-        image: docker.io/bitnami/sealed-secrets-controller:0.36.6
+        image: docker.io/bitnami/sealed-secrets-controller:0.37.0
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -79,23 +79,6 @@ spec:
       volumes:
       - emptyDir: {}
         name: tmp
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  annotations: {}
-  labels:
-    name: sealed-secrets-controller
-  name: sealed-secrets-controller
-  namespace: kube-system
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: sealed-secrets-key-admin
-subjects:
-- kind: ServiceAccount
-  name: sealed-secrets-controller
-  namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -143,6 +126,23 @@ spec:
   type: ClusterIP
 ---
 apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  annotations: {}
+  labels:
+    name: sealed-secrets-controller
+  name: sealed-secrets-controller
+  namespace: kube-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: sealed-secrets-key-admin
+subjects:
+- kind: ServiceAccount
+  name: sealed-secrets-controller
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   annotations: {}
@@ -158,22 +158,6 @@ rules:
   verbs:
   - create
   - list
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  annotations: {}
-  labels:
-    name: sealed-secrets-controller
-  name: sealed-secrets-controller
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: secrets-unsealer
-subjects:
-- kind: ServiceAccount
-  name: sealed-secrets-controller
-  namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -411,3 +395,19 @@ subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: Group
   name: system:authenticated
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations: {}
+  labels:
+    name: sealed-secrets-controller
+  name: sealed-secrets-controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: secrets-unsealer
+subjects:
+- kind: ServiceAccount
+  name: sealed-secrets-controller
+  namespace: kube-system
