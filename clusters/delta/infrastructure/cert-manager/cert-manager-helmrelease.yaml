@@ -5,13 +5,14 @@ metadata:
   namespace: cert-manager
 spec:
   releaseName: cert-manager
-  targetNamespace: cert-manager          # ← перенесено на уровень spec
+  targetNamespace: cert-manager # ← перенесено на уровень spec
+
   install:
     createNamespace: true
   chart:
     spec:
       chart: cert-manager
-      version: 1.20.2
+      version: 1.20.3
       sourceRef:
         kind: HelmRepository
         name: jetstack
@@ -19,4 +20,4 @@ spec:
   interval: 5m
   values:
     crds:
-      enabled: false                     # ← важно: CRD уже восстановлены вручную
+      enabled: false # ← важно: CRD уже восстановлены вручную
